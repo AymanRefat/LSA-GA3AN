@@ -5,6 +5,8 @@ int const  N = 1e6 + 1;
 ll const mod = 1e9 + 7;
 ///////////////////// Number theory /////////////////////////////
 // Smallest Prime Factor (SPF)
+// Complexity O(Nlog(log(N)))
+// space complexity O(N)
 vector<ll> spf(N);
 void pre_spf()
 {
@@ -19,6 +21,8 @@ void pre_spf()
 	}
 }
 // Sieve of Eratosthenes
+// Complexity O(Nlog(log(N)))
+// space complexity O(N)
 vector<bool> sieve(N, true);
 sieve[0] = sieve[1] = 0;
 for (ll i = 2; i * i < N; ++i)
@@ -32,6 +36,7 @@ for (ll i = 2; i * i < N; ++i)
 	}
 }
 // Fast Power
+// Complexity O(log(power(y))
 ll power(ll x, ll y, ll p = mod)
 {
 	ll res = 1;
@@ -52,12 +57,17 @@ ll power(ll x, ll y, ll p = mod)
 void modadd(ll &a, ll b) { a = ((a % mod) + (b % mod)) % mod; }
 void modsub(ll  &a, ll b) { a = ((a % mod) - (b % mod) + mod) % mod; }
 void modmul(ll  &a, ll b) { a = ((a % mod) * (b % mod)) % mod; }
+// Complexity O(log(mod))
 ll modInverse(ll n, ll m=mod)
 {
 	return power(n, m - 2, m);
 }
 // Combinatorics
+// precompute factorial and inverse factorial to save time in nCr and nPr
+
+// Space Complexity O(2N)
 ll fact[N], invfact[N];
+// NLog(N) time complexity
 void pre_fac()
 {
 	fact[0] = 1;
@@ -67,10 +77,14 @@ void pre_fac()
         invfact[i] = modInverse(fact[i],mod);
 	}
 }
+// nCr = n! / (r! * (n-r)!)
+// Complexity O(1)
 ll nCr(ll n, ll r, ll m = mod)
 {
 	return (fact[n] * invfact[r]  * invfact[n - r] ) % m;
 }
+// nPr = n! / (n-r)!
+// Complexity O(1)
 ll nPr(ll n , ll  r , ll m = mod)
 {
     return (fact[n] * invfact[n-r]) % m;

@@ -52,9 +52,9 @@ ll power(ll x, ll y, ll p = mod)
 void modadd(ll &a, ll b) { a = ((a % mod) + (b % mod)) % mod; }
 void modsub(ll  &a, ll b) { a = ((a % mod) - (b % mod) + mod) % mod; }
 void modmul(ll  &a, ll b) { a = ((a % mod) * (b % mod)) % mod; }
-ll modInverse(ll n, ll p=mod)
+ll modInverse(ll n, ll m=mod)
 {
-	return power(n, p - 2, p);
+	return power(n, m - 2, m);
 }
 // Combinatorics
 ll fact[N], invfact[N];
@@ -64,14 +64,14 @@ void pre_fac()
 	for (ll i = 1; i < N; i++)
 	{
 		fact[i] = (fact[i - 1] * i) % mod;
-	}
-	invfact[N - 1] = modInverse(fact[N - 1]);
-	for (ll i = N - 2; i >= 0; i--)
-	{
-		invfact[i] = (invfact[i + 1] * (i + 1)) % mod;
+        invfact[i] = modInverse(fact[i],mod);
 	}
 }
-ll nCr(ll n, ll r, ll p = mod)
+ll nCr(ll n, ll r, ll m = mod)
 {
-	return (invfact[n] * invfact[r] % p * invfact[n - r] % p) % p;
+	return (fact[n] * invfact[r]  * invfact[n - r] ) % m;
+}
+ll nPr(ll n , ll  r , ll m = mod)
+{
+    return (fact[n] * invfact[n-r]) % m;
 }

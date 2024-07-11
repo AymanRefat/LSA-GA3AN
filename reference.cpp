@@ -78,9 +78,12 @@ void pre_fac()
 	}
 }
 // nCr = n! / (r! * (n-r)!) + Complexity O(1)
-ll nCr(ll n, ll r, ll m = mod){
-    if (n < r)return 0;
-    if (r == 0)return 1;
-    return fact[n] * invfact[r]%m  * invfact[n - r] % m;}
+ll nCr(ll n, ll r, ll m = mod) {
+    if(r > n)
+        return -1;
+    if(r == 0)
+        return 1;
+    return ((fact[n]%mod*invfact[r]%mod)%mod*invfact[n-r]%mod)%mod;
+}
 // nPr = n! / (n-r)! + Complexity O(1)
 ll nPr(ll n , ll  r , ll m = mod){ return (fact[n] * invfact[n-r]) % m;}

@@ -7,4 +7,5 @@ include_directories(.)
 include_directories(snippets)
 
 add_executable(LSA_GA3AN
-        reference.cpp)
+        reference.cpp
+        snippets/dp.cpp)

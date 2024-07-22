@@ -88,6 +88,11 @@ void solve()
     cout << intersect({0,0},{1,1},{0,6},{-6,0}) << '\n';
 }
 
+int lattice(int x1 , int y1 , int x2 , int y2)
+{
+    return __gcd(abs(x1-x2),abs(y1-y2))-1;
+}
+
 /*
 Notes:
 -Measure of an angle of a uniform polygon

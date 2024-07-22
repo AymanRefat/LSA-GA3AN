@@ -34,4 +34,20 @@ ll rec(int i , int cap)
     ll take = ((cap - v[i].first >= 0) ? rec(i+1,cap-v[i].first)+v[i].second : 0);
     return dp[i][cap] = max(take,leave);
 }
-
+ll number_of_ways(){
+    // a + b
+    // b + a is counted too
+    int mod = 1e9 + 7;
+    int n, x;
+    cin >> n >> x;
+    vector<int> v(n);
+    for (auto &i: v)cin >> i;
+    vector<int> dp(x + 1, 0);
+    dp[0] = 1;
+    for (int i = 1; i <= x; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i - v[j] >= 0) dp[i] += +dp[i - v[j]], dp[i] %= mod;
+        }
+    }
+    cout << dp[x];
+}

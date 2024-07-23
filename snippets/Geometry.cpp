@@ -75,6 +75,54 @@ ld intersection(circle c1, circle c2)
     }
 }
 
+ld distance(ld x1, ld y1, ld x2, ld y2)
+{
+    return sqrtl((x1 - x2) * (x1 - x2) + (y1-y2)*(y1-y2));
+}
+
+//returns center of the largest circle inscribed in the intersection
+//area of two other circles and its radius
+pair<pair<ld,ld>,ld> largest_area(circle c1 , circle c2)
+{
+    ld d = distance(c1.x,c1.y,c2.x,c2.y);
+    ld r = (c1.r+c2.r-d)/2;
+    ld x,y;
+    if(c1.x == c2.x)
+    {
+        x = c1.x;
+        if(c1.y < c2.y)
+        {
+            y = c1.y + c1.r - r;
+        }
+        else
+        {
+            y = c2.y + c2.r - r;
+        }
+    }
+    else
+    {
+        ld slope = (c2.y - c1.y) / (c2.x - c1.x);
+        ld hyp;
+        if(c1.x < c2.x)
+            hyp = c1.r - r;
+        else
+            hyp = c2.r - r;
+        ld dx = hyp * cos(atan(slope));
+        ld dy = hyp * sin(atan(slope));
+        if(c1.x < c2.x)
+        {
+            x = c1.x + dx;
+            y = c1.y + dy;
+        }
+        else
+        {
+            x = c2.x+dx;
+            y = c2.y+dy;
+        }
+    }
+    return {{x,y},r};
+}
+
 void solve()
 {
     point z1 = {2,1},z2 = {5,3};
